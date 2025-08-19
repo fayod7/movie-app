@@ -39,7 +39,7 @@ const Carousel = () => {
             data?.results?.map((movie:any)=> (
         <SwiperSlide key={movie.id} className='h-[650px] relative'>
           <img  loading='lazy' onClick={() => navigate(`/movie/${movie.id}`)} className='w-full h-full object-cover rounded-lg' src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt="" />
-            <h2 className='font-medium text-[50px] text-white absolute bottom-17 left-0 right-0 text-center max-[550px]:text-[28px]'>{movie.title}</h2>
+            <h2 className='font-medium text-[50px] text-[#C61F1F] absolute bottom-17 left-0 right-0 text-center max-[550px]:text-[28px]'>{movie.title}</h2>
         </SwiperSlide>
 
             ))

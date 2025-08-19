@@ -28,8 +28,8 @@ const MovieView:FC<Props> = ({ data }) => {
                     <p className='text-yellow-500 font-bold'>{movie.vote_average}</p>
                 
                 </div>
-                    <button onClick={()=> dispatch(toggleBookmark(movie))} className='size-10  bg-white rounded-full shadow flex justify-center items-center absolute top-2 right-2 opacity-0 translate-x-4 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 ease-in-out max-[800px]:opacity-100 max-[800px]:right-6 cursor-pointer'>
-                        <Bookmark strokeWidth={isSaved ? 0 : 2} fill={isSaved ? "black" : "none"} />
+                    <button onClick={()=> dispatch(toggleBookmark(movie))} className='size-10  bg-black rounded-full shadow flex justify-center items-center absolute top-2 right-2 opacity-0 translate-x-4 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 ease-in-out max-[800px]:opacity-100 max-[800px]:right-6 cursor-pointer text-[#C61F1F]'>
+                        <Bookmark strokeWidth={isSaved ? 0 : 2} fill={isSaved ? "#C61F1F" : "none"} />
                     </button>
             </div>
 })

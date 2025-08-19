@@ -10,10 +10,20 @@
 .header__link.active{
   color: red;
 }
-body{
-  background: #000;
+@layer base {
+  body {
+    @apply bg-black text-white
+  }
 }
-
+.swiper-button-next:after, 
+.swiper-button-prev:after{
+  background: #2b2b2b;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid; 
+  place-content: center; 
+}
 .animation {
   background-color: #e2e8f0; 
   background: linear-gradient(to right,
@@ -58,7 +68,7 @@ body{
     font-weight: 600;
 }
 .tab a.active{
-    color: dodgerblue;
+    color: #C61F1F;
     text-decoration: underline;
 }
 .tab{
