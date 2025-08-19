@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-
+import  bookmark  from '../features/bookmark/store/bookmarkSlice';
 export const store = configureStore({
   reducer: {
-    fake: ()=> "hello"
+    bookmark
   },
 });
 

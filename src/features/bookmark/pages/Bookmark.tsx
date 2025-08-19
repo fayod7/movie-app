@@ -1,9 +1,12 @@
 import { memo } from 'react';
+import { useSelector } from 'react-redux';
+import MovieView from '../../movies/components/movei-view/MovieView';
 
 const Bookmark = () => {
+  const bookmark = useSelector((state:any) => state.bookmark.movies)
   return (
     <div className="Bookmark">
-      <h2>Bookmark</h2>
+      <MovieView data={bookmark}/>
     </div>
   );
 };

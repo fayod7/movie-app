@@ -2,7 +2,7 @@
 import { memo, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../../shared/assets/sitelogo.svg'
-import { BookMarked, Clapperboard, House } from 'lucide-react';
+import { BookMarked, Clapperboard, House, Search } from 'lucide-react';
 const Header = () => {
   const [isScroll, setIsScroll] = useState<boolean>(false)
   useEffect(() => {
@@ -35,6 +35,11 @@ const Header = () => {
         <li>
         <NavLink className={'flex flex-col-reverse justify-between items-center header__link'} to={'/bookmark'}>
           <span>Bookmark</span> <BookMarked />
+        </NavLink>
+        </li>
+        <li>
+        <NavLink className={'flex flex-col-reverse justify-between items-center header__link'} to={'/search'}>
+          <span>Search</span> <Search />
         </NavLink>
         </li>
         </ul>

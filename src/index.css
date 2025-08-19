@@ -13,3 +13,56 @@
 body{
   background: #000;
 }
+
+.animation {
+  background-color: #e2e8f0; 
+  background: linear-gradient(to right,
+              #f6f7f8 0%,  
+              #edeef1 20%, 
+              #f6f7f8 40%, 
+              #f6f7f8 100% 
+);
+  background-size: 200% 100%;
+
+  animation: skeletonAnimation 1.5s ease-in-out infinite;
+}
+
+@keyframes skeletonAnimation {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.scrollbar-custom::-webkit-scrollbar {
+    height: 12px;
+    background-color: #2b2b2b;
+    border-radius: 6px;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #64748b;
+    border-radius: 6px;
+    border: 2px solid #2b2b2b;
+}
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
+}
+.scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: #64748b #2b2b2b;
+}
+.tab a{
+    color: #555;
+    font-size: 20px;
+    font-weight: 600;
+}
+.tab a.active{
+    color: dodgerblue;
+    text-decoration: underline;
+}
+.tab{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}

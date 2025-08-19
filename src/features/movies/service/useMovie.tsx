@@ -10,6 +10,10 @@ export  const useMovie = () => {
         queryKey: ["movie-key", id],
         queryFn: () => api.get(`/movie/${id}`).then(res => res.data)
     });
+    const getMovieItems = (id: number, path:string) => useQuery({
+        queryKey: ["movie-key", id, path],
+        queryFn: () => api.get(`/movie/${id}/${path}`).then(res => res.data)
+    });
 
-    return { getMovies, getMovieById }
+    return { getMovies, getMovieItems, getMovieById }
 }
