@@ -24,27 +24,6 @@
   display: grid; 
   place-content: center; 
 }
-.animation {
-  background-color: #e2e8f0; 
-  background: linear-gradient(to right,
-              #f6f7f8 0%,  
-              #edeef1 20%, 
-              #f6f7f8 40%, 
-              #f6f7f8 100% 
-);
-  background-size: 200% 100%;
-
-  animation: skeletonAnimation 1.5s ease-in-out infinite;
-}
-
-@keyframes skeletonAnimation {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
 .scrollbar-custom::-webkit-scrollbar {
     height: 12px;
     background-color: #2b2b2b;
@@ -75,4 +54,40 @@
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+}
+.image-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%; /* Adjust this value to change the height of the gradient */
+  background: linear-gradient(to top, black, transparent);
+  pointer-events: none; /* Allows clicks to pass through the gradient to the image below */
+}
+.custom-pagination .ant-pagination-item {
+  background-color: #1d1d1d !important;
+  border-color: #333 !important;
+}
+
+.custom-pagination .ant-pagination-item a {
+  color: white !important;
+}
+
+.custom-pagination .ant-pagination-item-active {
+  background-color: #C61F1F !important;
+  border-color: #C61F1F !important;
+}
+
+.custom-pagination .ant-pagination-prev .anticon,
+.custom-pagination .ant-pagination-next .anticon {
+  color: white !important;
+}
+@media (max-width:570px) {
+.swiper-button-next:after, 
+.swiper-button-prev:after{
+  min-width: 47px;
+  height: 47px;
+
+}
 }

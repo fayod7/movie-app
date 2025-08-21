@@ -9,9 +9,9 @@ interface Movie {
 interface BookmarkState {
   movies: Movie[]
 }
-
+const bookmarkStore = localStorage.getItem('bookmark')
 const initialState: BookmarkState = {
-  movies: []
+  movies: bookmarkStore ? JSON.parse(bookmarkStore) : []
 }
 
 export const bookmarkSlice = createSlice({
@@ -22,8 +22,10 @@ export const bookmarkSlice = createSlice({
         const exist = state.movies.some(item => item.id === action.payload.id)
         if(exist) {
            state.movies = state.movies.filter(item => item.id !== action.payload.id)
-        } else {
+           localStorage.setItem('bookmark', JSON.stringify(state.movies))
+          } else {
             state.movies = [...state.movies, action.payload]
+            localStorage.setItem('bookmark', JSON.stringify(state.movies))
         }
     }
   }

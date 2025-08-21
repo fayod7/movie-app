@@ -1,10 +1,9 @@
 import { memo, useLayoutEffect } from 'react';
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useMovie } from '../service/useMovie';
-import Image from '../../../shared/components/image/image';
 import MovieView from '../components/movei-view/MovieView';
 import { IMAGE_URL } from '../../../shared/const';
-import { ChevronDown } from 'lucide-react';
+import MovieDetailsSkeleton from '../components/movei-view/MovieDetailsSkeleton';
 
 const MovieDetails = () => {
   const { id } = useParams()
@@ -12,57 +11,88 @@ const MovieDetails = () => {
   const { getMovieItems, getMovieById } = useMovie()
   const { data, isLoading } = getMovieById( numericId )
   const { data: similarData } = getMovieItems( numericId, 'similar' )
-  console.log(similarData);
+  console.log(data);
+  
   
   useLayoutEffect(() => {
   window.scrollTo(0, 0);
 }, []);
 const navigate = useNavigate()
   if(isLoading){
-    return <div className='w-full animation h-[640px]'></div>
+    return <MovieDetailsSkeleton/>
   }
   console.log(data);
   return (
-    <>
-     
-       
-        <div className='flex flex-col gap-4'>
-          <div className='w-full relative'>
-         <Image  className='rounded-lg w-full object-contain shadow'  src={`${IMAGE_URL}${data?.backdrop_path}`} height={'640'}/>
-         <button className='absolute top-10 left-10 size-10 rotate-90 text-[#C61F1F] bg-[#00000080] px-2 py-1 rounded-md flex justify-center items-center' onClick={() => navigate('/')}>
-          <ChevronDown className='size-8'/>
-         </button>
-          </div>
- <div className="flex container py-10 gap-8 max-[830px]:flex-col max-[830px]:items-center">
-       <div className="w-[50%] h-96 max-[830px]:w-[80%] ">
+<div className="relative w-full bg-black text-white">
+  <div className="relative w-full">
+    <div
+      className="absolute inset-0 bg-cover bg-center opacity-30 bg-gradient-to-t from-black via-black/40 to-transparent"
+      style={{ backgroundImage: `url(${IMAGE_URL}${data?.backdrop_path})` }}
+    ></div>
+    <div className="relative container mx-auto py-10 flex flex-col gap-8 max-w-6xl">
+      <button
+        onClick={() => navigate('/')}
+        className="text-[#C61F1F] bg-black bg-opacity-50 px-4 py-2 rounded hover:bg-opacity-70 w-max"
+      >
+        Back
+      </button>
+      <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
         <img
-      loading="lazy"
-      className="rounded-lg h-full w-full object-cover"
-      src={`${IMAGE_URL}${data?.poster_path}`}
-      alt={data?.title}
-     />
+          className="w-64 lg:w-80 rounded-lg shadow-lg flex-shrink-0"
+          src={`${IMAGE_URL}${data?.poster_path}`}
+          alt={data?.title}
+        />
+        <div className="flex flex-col gap-4">
+          <h1 className="text-4xl lg:text-5xl font-bold text-[#C61F1F]">{data?.title}</h1>
+          <p className="text-gray-300 italic">{data?.tagline}</p>
+          <p className="text-gray-100">{data?.overview}</p>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {data?.genres?.map((genre: any) => (
+              <span
+                key={genre.id}
+                className="bg-[#C61F1F] text-black px-2 py-1 rounded text-sm font-medium"
+              >
+                {genre.name}
+              </span>
+            ))}
+          </div>
+          <div className="flex gap-4 mt-4 flex-wrap text-gray-400">
+            <span>Release: {data?.release_date}</span>
+            <span>Runtime: {data?.runtime} min</span>
+            <span>Rating: {data?.vote_average} ({data?.vote_count})</span>
+          </div>
+        </div>
+      </div>
     </div>
-  <div className="flex flex-col max-w-[500px] gap-2.5">
-    <h3 className="text-[#C61F1F] text-4xl font-medium max-[830px]:text-2xl">
-      {data?.title}
-    </h3>
-    <p className="text-white">{data?.tagline}</p>
-    <h3 className='text-gray-500'>{data?.overview}</h3>
+  </div>
+  <div className="container mx-auto max-w-6xl mt-8">
+    <div className="flex gap-6 border-b border-gray-700">
+      <NavLink
+        end
+        to=""
+        className={({ isActive }) => isActive ? 'text-[#C61F1F] border-b-2 border-[#C61F1F] pb-2' : 'text-gray-300 pb-2'}
+      >
+        Casts
+      </NavLink>
+      <NavLink
+        to="moments"
+        className={({ isActive }) => isActive ? 'text-[#C61F1F] border-b-2 border-[#C61F1F] pb-2' : 'text-gray-300 pb-2'}
+      >
+        Movie Moments
+      </NavLink>
+    </div>
+
+    <div className="mt-6">
+      <Outlet />
+    </div>
+  </div>
+  <div className="container mx-auto max-w-6xl mt-12">
+    <h2 className="text-white text-3xl text-center mb-6">Similar Movies</h2>
+    <MovieView data={similarData?.results?.slice(0, 8)} />
   </div>
 </div>
 
-          <div className="tab container">
-             <NavLink end={true} to={''}>Casts</NavLink>
-             <NavLink  to={'moments'}>Movie moments</NavLink>
-          </div>
-          <Outlet/>
-        </div>
-        <div className='mt-3'>
-          <h2 className='text-white text-center text-3xl'>Similar movies</h2>
-          <MovieView data={similarData?.results?.slice(0,8)}/>
-        </div>
-     
-    </>
+
   );
 };
 
