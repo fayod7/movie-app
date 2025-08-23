@@ -15,17 +15,17 @@ import { useNavigate } from 'react-router-dom';
 import { FreeMode, Navigation, Thumbs, Autoplay } from 'swiper/modules';
 import { IMAGE_URL } from '../../const';
 import { Play } from 'lucide-react';
+import CarouselSkeleton from './CarouselSkeleton';
 
 const Carousel = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
     const { getMovies } = useMovie()
     const { data, isLoading } = getMovies()
-    if(isLoading){
-
-    }
-    console.log(data);
     const navigate = useNavigate()
     const [loaded, setLoaded] = useState(false)
+    if(isLoading){
+      return <CarouselSkeleton/>
+    }
   return (
     <div className="container pb-5 pt-2 ">
         <>
