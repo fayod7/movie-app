@@ -31,7 +31,6 @@ const Movies = () => {
     setParams(params)
   }
   const handleChangeSort = (value:string) => {
-    console.log(value);
     params.set('sort', value)
     setParams(params)
   }

@@ -4,7 +4,6 @@ import { IMAGE_URL } from '../../../../shared/const';
 import { Bookmark } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleBookmark } from '../../../bookmark/store/bookmarkSlice';
-import posterNullImg from '../../../../shared/assets/noImage.webp'
 interface Props {
     data: any[] | undefined
 }
@@ -17,10 +16,19 @@ const MovieView:FC<Props> = ({ data }) => {
     {
         data?.map((movie:any) => {
             const isSaved = bookmark.some((m:any) => m.id === movie.id )
-            const image = movie.poster_path ?  `${IMAGE_URL}${movie.poster_path}` : posterNullImg
             return <div className='group relative' key={movie.id}>
                 <div onClick={() => navigate(`/movie/${movie.id}`)} className='aspect-[2/3]'>
-                    <img className='hover:cursor-pointer rounded-lg' src={image} />
+ {movie.poster_path ? (
+    <img
+      className="hover:cursor-pointer rounded-lg w-full h-full object-cover"
+      src={`${IMAGE_URL}${movie.poster_path}`}
+      alt={movie.title}
+    />
+  ) : (
+    <div className="flex justify-center items-center bg-[#1d1d1d] rounded-lg w-full h-full">
+      <p className="text-white text-[18px]">No image</p>
+    </div>
+  )}
                 </div>
                 <div className='p-2'>
                     <h3 className='font-bold line-clamp-1 text-white text-2xl' title={movie.title}>{movie.title}</h3> 

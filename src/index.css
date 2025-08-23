@@ -83,11 +83,15 @@
 .custom-pagination .ant-pagination-next .anticon {
   color: white !important;
 }
+.ant-input:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #d9d9d9;
+}
 @media (max-width:570px) {
-.swiper-button-next:after, 
-.swiper-button-prev:after{
-  min-width: 47px;
-  height: 47px;
-
+.swiper-button-next:after img, 
+.swiper-button-prev:after img{
+  min-width: 10px;
+  height: 10px;
 }
 }

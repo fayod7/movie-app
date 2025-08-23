@@ -17,7 +17,9 @@ export  const useMovie = () => {
             {
                 params: { ...params, without_genres: "10749,36,18,99,27" },
             }
-        ).then(res => res.data)
+        ).then(res => res.data),
+        gcTime: 1000 * 60 * 5, //cache time
+        staleTime: 1000 * 60 //fresh time
     })
     const getMovieById = (id: number) => useQuery({
         queryKey: ["movie-key", id],
